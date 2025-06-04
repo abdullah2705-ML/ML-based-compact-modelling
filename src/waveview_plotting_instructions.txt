@@ -1,0 +1,659 @@
+# Instructions for Plotting in WaveView
+
+## Running the HSPICE file
+Run the HSPICE file with:
+hspice iv_data_for_wv.sp
+
+## Opening in WaveView
+Open WaveView and load the .tr0 file:
+wv &
+
+## Plotting Id-Vg Curves
+For each Vd value (e.g., Vd=0.80):
+- For Vd=0.01V, plot these signals:
+  * I(I_ACTUAL_VD0.01) vs V(vg) for actual current
+  * I(I_PRED_VD0.01) vs V(vg) for predicted current
+
+- For Vd=0.02V, plot these signals:
+  * I(I_ACTUAL_VD0.02) vs V(vg) for actual current
+  * I(I_PRED_VD0.02) vs V(vg) for predicted current
+
+- For Vd=0.03V, plot these signals:
+  * I(I_ACTUAL_VD0.03) vs V(vg) for actual current
+  * I(I_PRED_VD0.03) vs V(vg) for predicted current
+
+- For Vd=0.04V, plot these signals:
+  * I(I_ACTUAL_VD0.04) vs V(vg) for actual current
+  * I(I_PRED_VD0.04) vs V(vg) for predicted current
+
+- For Vd=0.05V, plot these signals:
+  * I(I_ACTUAL_VD0.05) vs V(vg) for actual current
+  * I(I_PRED_VD0.05) vs V(vg) for predicted current
+
+- For Vd=0.06V, plot these signals:
+  * I(I_ACTUAL_VD0.06) vs V(vg) for actual current
+  * I(I_PRED_VD0.06) vs V(vg) for predicted current
+
+- For Vd=0.07V, plot these signals:
+  * I(I_ACTUAL_VD0.07) vs V(vg) for actual current
+  * I(I_PRED_VD0.07) vs V(vg) for predicted current
+
+- For Vd=0.08V, plot these signals:
+  * I(I_ACTUAL_VD0.08) vs V(vg) for actual current
+  * I(I_PRED_VD0.08) vs V(vg) for predicted current
+
+- For Vd=0.09V, plot these signals:
+  * I(I_ACTUAL_VD0.09) vs V(vg) for actual current
+  * I(I_PRED_VD0.09) vs V(vg) for predicted current
+
+- For Vd=0.10V, plot these signals:
+  * I(I_ACTUAL_VD0.10) vs V(vg) for actual current
+  * I(I_PRED_VD0.10) vs V(vg) for predicted current
+
+- For Vd=0.11V, plot these signals:
+  * I(I_ACTUAL_VD0.11) vs V(vg) for actual current
+  * I(I_PRED_VD0.11) vs V(vg) for predicted current
+
+- For Vd=0.12V, plot these signals:
+  * I(I_ACTUAL_VD0.12) vs V(vg) for actual current
+  * I(I_PRED_VD0.12) vs V(vg) for predicted current
+
+- For Vd=0.13V, plot these signals:
+  * I(I_ACTUAL_VD0.13) vs V(vg) for actual current
+  * I(I_PRED_VD0.13) vs V(vg) for predicted current
+
+- For Vd=0.14V, plot these signals:
+  * I(I_ACTUAL_VD0.14) vs V(vg) for actual current
+  * I(I_PRED_VD0.14) vs V(vg) for predicted current
+
+- For Vd=0.15V, plot these signals:
+  * I(I_ACTUAL_VD0.15) vs V(vg) for actual current
+  * I(I_PRED_VD0.15) vs V(vg) for predicted current
+
+- For Vd=0.16V, plot these signals:
+  * I(I_ACTUAL_VD0.16) vs V(vg) for actual current
+  * I(I_PRED_VD0.16) vs V(vg) for predicted current
+
+- For Vd=0.17V, plot these signals:
+  * I(I_ACTUAL_VD0.17) vs V(vg) for actual current
+  * I(I_PRED_VD0.17) vs V(vg) for predicted current
+
+- For Vd=0.18V, plot these signals:
+  * I(I_ACTUAL_VD0.18) vs V(vg) for actual current
+  * I(I_PRED_VD0.18) vs V(vg) for predicted current
+
+- For Vd=0.19V, plot these signals:
+  * I(I_ACTUAL_VD0.19) vs V(vg) for actual current
+  * I(I_PRED_VD0.19) vs V(vg) for predicted current
+
+- For Vd=0.20V, plot these signals:
+  * I(I_ACTUAL_VD0.20) vs V(vg) for actual current
+  * I(I_PRED_VD0.20) vs V(vg) for predicted current
+
+- For Vd=0.21V, plot these signals:
+  * I(I_ACTUAL_VD0.21) vs V(vg) for actual current
+  * I(I_PRED_VD0.21) vs V(vg) for predicted current
+
+- For Vd=0.22V, plot these signals:
+  * I(I_ACTUAL_VD0.22) vs V(vg) for actual current
+  * I(I_PRED_VD0.22) vs V(vg) for predicted current
+
+- For Vd=0.23V, plot these signals:
+  * I(I_ACTUAL_VD0.23) vs V(vg) for actual current
+  * I(I_PRED_VD0.23) vs V(vg) for predicted current
+
+- For Vd=0.24V, plot these signals:
+  * I(I_ACTUAL_VD0.24) vs V(vg) for actual current
+  * I(I_PRED_VD0.24) vs V(vg) for predicted current
+
+- For Vd=0.25V, plot these signals:
+  * I(I_ACTUAL_VD0.25) vs V(vg) for actual current
+  * I(I_PRED_VD0.25) vs V(vg) for predicted current
+
+- For Vd=0.26V, plot these signals:
+  * I(I_ACTUAL_VD0.26) vs V(vg) for actual current
+  * I(I_PRED_VD0.26) vs V(vg) for predicted current
+
+- For Vd=0.27V, plot these signals:
+  * I(I_ACTUAL_VD0.27) vs V(vg) for actual current
+  * I(I_PRED_VD0.27) vs V(vg) for predicted current
+
+- For Vd=0.28V, plot these signals:
+  * I(I_ACTUAL_VD0.28) vs V(vg) for actual current
+  * I(I_PRED_VD0.28) vs V(vg) for predicted current
+
+- For Vd=0.29V, plot these signals:
+  * I(I_ACTUAL_VD0.29) vs V(vg) for actual current
+  * I(I_PRED_VD0.29) vs V(vg) for predicted current
+
+- For Vd=0.30V, plot these signals:
+  * I(I_ACTUAL_VD0.30) vs V(vg) for actual current
+  * I(I_PRED_VD0.30) vs V(vg) for predicted current
+
+- For Vd=0.31V, plot these signals:
+  * I(I_ACTUAL_VD0.31) vs V(vg) for actual current
+  * I(I_PRED_VD0.31) vs V(vg) for predicted current
+
+- For Vd=0.32V, plot these signals:
+  * I(I_ACTUAL_VD0.32) vs V(vg) for actual current
+  * I(I_PRED_VD0.32) vs V(vg) for predicted current
+
+- For Vd=0.33V, plot these signals:
+  * I(I_ACTUAL_VD0.33) vs V(vg) for actual current
+  * I(I_PRED_VD0.33) vs V(vg) for predicted current
+
+- For Vd=0.34V, plot these signals:
+  * I(I_ACTUAL_VD0.34) vs V(vg) for actual current
+  * I(I_PRED_VD0.34) vs V(vg) for predicted current
+
+- For Vd=0.35V, plot these signals:
+  * I(I_ACTUAL_VD0.35) vs V(vg) for actual current
+  * I(I_PRED_VD0.35) vs V(vg) for predicted current
+
+- For Vd=0.36V, plot these signals:
+  * I(I_ACTUAL_VD0.36) vs V(vg) for actual current
+  * I(I_PRED_VD0.36) vs V(vg) for predicted current
+
+- For Vd=0.37V, plot these signals:
+  * I(I_ACTUAL_VD0.37) vs V(vg) for actual current
+  * I(I_PRED_VD0.37) vs V(vg) for predicted current
+
+- For Vd=0.38V, plot these signals:
+  * I(I_ACTUAL_VD0.38) vs V(vg) for actual current
+  * I(I_PRED_VD0.38) vs V(vg) for predicted current
+
+- For Vd=0.39V, plot these signals:
+  * I(I_ACTUAL_VD0.39) vs V(vg) for actual current
+  * I(I_PRED_VD0.39) vs V(vg) for predicted current
+
+- For Vd=0.40V, plot these signals:
+  * I(I_ACTUAL_VD0.40) vs V(vg) for actual current
+  * I(I_PRED_VD0.40) vs V(vg) for predicted current
+
+- For Vd=0.41V, plot these signals:
+  * I(I_ACTUAL_VD0.41) vs V(vg) for actual current
+  * I(I_PRED_VD0.41) vs V(vg) for predicted current
+
+- For Vd=0.42V, plot these signals:
+  * I(I_ACTUAL_VD0.42) vs V(vg) for actual current
+  * I(I_PRED_VD0.42) vs V(vg) for predicted current
+
+- For Vd=0.43V, plot these signals:
+  * I(I_ACTUAL_VD0.43) vs V(vg) for actual current
+  * I(I_PRED_VD0.43) vs V(vg) for predicted current
+
+- For Vd=0.44V, plot these signals:
+  * I(I_ACTUAL_VD0.44) vs V(vg) for actual current
+  * I(I_PRED_VD0.44) vs V(vg) for predicted current
+
+- For Vd=0.45V, plot these signals:
+  * I(I_ACTUAL_VD0.45) vs V(vg) for actual current
+  * I(I_PRED_VD0.45) vs V(vg) for predicted current
+
+- For Vd=0.46V, plot these signals:
+  * I(I_ACTUAL_VD0.46) vs V(vg) for actual current
+  * I(I_PRED_VD0.46) vs V(vg) for predicted current
+
+- For Vd=0.47V, plot these signals:
+  * I(I_ACTUAL_VD0.47) vs V(vg) for actual current
+  * I(I_PRED_VD0.47) vs V(vg) for predicted current
+
+- For Vd=0.48V, plot these signals:
+  * I(I_ACTUAL_VD0.48) vs V(vg) for actual current
+  * I(I_PRED_VD0.48) vs V(vg) for predicted current
+
+- For Vd=0.49V, plot these signals:
+  * I(I_ACTUAL_VD0.49) vs V(vg) for actual current
+  * I(I_PRED_VD0.49) vs V(vg) for predicted current
+
+- For Vd=0.50V, plot these signals:
+  * I(I_ACTUAL_VD0.50) vs V(vg) for actual current
+  * I(I_PRED_VD0.50) vs V(vg) for predicted current
+
+- For Vd=0.51V, plot these signals:
+  * I(I_ACTUAL_VD0.51) vs V(vg) for actual current
+  * I(I_PRED_VD0.51) vs V(vg) for predicted current
+
+- For Vd=0.52V, plot these signals:
+  * I(I_ACTUAL_VD0.52) vs V(vg) for actual current
+  * I(I_PRED_VD0.52) vs V(vg) for predicted current
+
+- For Vd=0.53V, plot these signals:
+  * I(I_ACTUAL_VD0.53) vs V(vg) for actual current
+  * I(I_PRED_VD0.53) vs V(vg) for predicted current
+
+- For Vd=0.54V, plot these signals:
+  * I(I_ACTUAL_VD0.54) vs V(vg) for actual current
+  * I(I_PRED_VD0.54) vs V(vg) for predicted current
+
+- For Vd=0.55V, plot these signals:
+  * I(I_ACTUAL_VD0.55) vs V(vg) for actual current
+  * I(I_PRED_VD0.55) vs V(vg) for predicted current
+
+- For Vd=0.56V, plot these signals:
+  * I(I_ACTUAL_VD0.56) vs V(vg) for actual current
+  * I(I_PRED_VD0.56) vs V(vg) for predicted current
+
+- For Vd=0.57V, plot these signals:
+  * I(I_ACTUAL_VD0.57) vs V(vg) for actual current
+  * I(I_PRED_VD0.57) vs V(vg) for predicted current
+
+- For Vd=0.58V, plot these signals:
+  * I(I_ACTUAL_VD0.58) vs V(vg) for actual current
+  * I(I_PRED_VD0.58) vs V(vg) for predicted current
+
+- For Vd=0.59V, plot these signals:
+  * I(I_ACTUAL_VD0.59) vs V(vg) for actual current
+  * I(I_PRED_VD0.59) vs V(vg) for predicted current
+
+- For Vd=0.60V, plot these signals:
+  * I(I_ACTUAL_VD0.60) vs V(vg) for actual current
+  * I(I_PRED_VD0.60) vs V(vg) for predicted current
+
+- For Vd=0.61V, plot these signals:
+  * I(I_ACTUAL_VD0.61) vs V(vg) for actual current
+  * I(I_PRED_VD0.61) vs V(vg) for predicted current
+
+- For Vd=0.62V, plot these signals:
+  * I(I_ACTUAL_VD0.62) vs V(vg) for actual current
+  * I(I_PRED_VD0.62) vs V(vg) for predicted current
+
+- For Vd=0.63V, plot these signals:
+  * I(I_ACTUAL_VD0.63) vs V(vg) for actual current
+  * I(I_PRED_VD0.63) vs V(vg) for predicted current
+
+- For Vd=0.64V, plot these signals:
+  * I(I_ACTUAL_VD0.64) vs V(vg) for actual current
+  * I(I_PRED_VD0.64) vs V(vg) for predicted current
+
+- For Vd=0.65V, plot these signals:
+  * I(I_ACTUAL_VD0.65) vs V(vg) for actual current
+  * I(I_PRED_VD0.65) vs V(vg) for predicted current
+
+- For Vd=0.66V, plot these signals:
+  * I(I_ACTUAL_VD0.66) vs V(vg) for actual current
+  * I(I_PRED_VD0.66) vs V(vg) for predicted current
+
+- For Vd=0.67V, plot these signals:
+  * I(I_ACTUAL_VD0.67) vs V(vg) for actual current
+  * I(I_PRED_VD0.67) vs V(vg) for predicted current
+
+- For Vd=0.68V, plot these signals:
+  * I(I_ACTUAL_VD0.68) vs V(vg) for actual current
+  * I(I_PRED_VD0.68) vs V(vg) for predicted current
+
+- For Vd=0.69V, plot these signals:
+  * I(I_ACTUAL_VD0.69) vs V(vg) for actual current
+  * I(I_PRED_VD0.69) vs V(vg) for predicted current
+
+- For Vd=0.70V, plot these signals:
+  * I(I_ACTUAL_VD0.70) vs V(vg) for actual current
+  * I(I_PRED_VD0.70) vs V(vg) for predicted current
+
+- For Vd=0.71V, plot these signals:
+  * I(I_ACTUAL_VD0.71) vs V(vg) for actual current
+  * I(I_PRED_VD0.71) vs V(vg) for predicted current
+
+- For Vd=0.72V, plot these signals:
+  * I(I_ACTUAL_VD0.72) vs V(vg) for actual current
+  * I(I_PRED_VD0.72) vs V(vg) for predicted current
+
+- For Vd=0.73V, plot these signals:
+  * I(I_ACTUAL_VD0.73) vs V(vg) for actual current
+  * I(I_PRED_VD0.73) vs V(vg) for predicted current
+
+- For Vd=0.74V, plot these signals:
+  * I(I_ACTUAL_VD0.74) vs V(vg) for actual current
+  * I(I_PRED_VD0.74) vs V(vg) for predicted current
+
+- For Vd=0.75V, plot these signals:
+  * I(I_ACTUAL_VD0.75) vs V(vg) for actual current
+  * I(I_PRED_VD0.75) vs V(vg) for predicted current
+
+- For Vd=0.76V, plot these signals:
+  * I(I_ACTUAL_VD0.76) vs V(vg) for actual current
+  * I(I_PRED_VD0.76) vs V(vg) for predicted current
+
+- For Vd=0.77V, plot these signals:
+  * I(I_ACTUAL_VD0.77) vs V(vg) for actual current
+  * I(I_PRED_VD0.77) vs V(vg) for predicted current
+
+- For Vd=0.78V, plot these signals:
+  * I(I_ACTUAL_VD0.78) vs V(vg) for actual current
+  * I(I_PRED_VD0.78) vs V(vg) for predicted current
+
+- For Vd=0.79V, plot these signals:
+  * I(I_ACTUAL_VD0.79) vs V(vg) for actual current
+  * I(I_PRED_VD0.79) vs V(vg) for predicted current
+
+- For Vd=0.80V, plot these signals:
+  * I(I_ACTUAL_VD0.80) vs V(vg) for actual current
+  * I(I_PRED_VD0.80) vs V(vg) for predicted current
+
+## Plotting Id-Vd Curves
+For each Vg value (e.g., Vg=0.80):
+- For Vg=0.01V, plot these signals:
+  * I(I_ACTUAL_VG0.01) vs V(vd) for actual current
+  * I(I_PRED_VG0.01) vs V(vd) for predicted current
+
+- For Vg=0.02V, plot these signals:
+  * I(I_ACTUAL_VG0.02) vs V(vd) for actual current
+  * I(I_PRED_VG0.02) vs V(vd) for predicted current
+
+- For Vg=0.03V, plot these signals:
+  * I(I_ACTUAL_VG0.03) vs V(vd) for actual current
+  * I(I_PRED_VG0.03) vs V(vd) for predicted current
+
+- For Vg=0.04V, plot these signals:
+  * I(I_ACTUAL_VG0.04) vs V(vd) for actual current
+  * I(I_PRED_VG0.04) vs V(vd) for predicted current
+
+- For Vg=0.05V, plot these signals:
+  * I(I_ACTUAL_VG0.05) vs V(vd) for actual current
+  * I(I_PRED_VG0.05) vs V(vd) for predicted current
+
+- For Vg=0.06V, plot these signals:
+  * I(I_ACTUAL_VG0.06) vs V(vd) for actual current
+  * I(I_PRED_VG0.06) vs V(vd) for predicted current
+
+- For Vg=0.07V, plot these signals:
+  * I(I_ACTUAL_VG0.07) vs V(vd) for actual current
+  * I(I_PRED_VG0.07) vs V(vd) for predicted current
+
+- For Vg=0.08V, plot these signals:
+  * I(I_ACTUAL_VG0.08) vs V(vd) for actual current
+  * I(I_PRED_VG0.08) vs V(vd) for predicted current
+
+- For Vg=0.09V, plot these signals:
+  * I(I_ACTUAL_VG0.09) vs V(vd) for actual current
+  * I(I_PRED_VG0.09) vs V(vd) for predicted current
+
+- For Vg=0.10V, plot these signals:
+  * I(I_ACTUAL_VG0.10) vs V(vd) for actual current
+  * I(I_PRED_VG0.10) vs V(vd) for predicted current
+
+- For Vg=0.11V, plot these signals:
+  * I(I_ACTUAL_VG0.11) vs V(vd) for actual current
+  * I(I_PRED_VG0.11) vs V(vd) for predicted current
+
+- For Vg=0.12V, plot these signals:
+  * I(I_ACTUAL_VG0.12) vs V(vd) for actual current
+  * I(I_PRED_VG0.12) vs V(vd) for predicted current
+
+- For Vg=0.13V, plot these signals:
+  * I(I_ACTUAL_VG0.13) vs V(vd) for actual current
+  * I(I_PRED_VG0.13) vs V(vd) for predicted current
+
+- For Vg=0.14V, plot these signals:
+  * I(I_ACTUAL_VG0.14) vs V(vd) for actual current
+  * I(I_PRED_VG0.14) vs V(vd) for predicted current
+
+- For Vg=0.15V, plot these signals:
+  * I(I_ACTUAL_VG0.15) vs V(vd) for actual current
+  * I(I_PRED_VG0.15) vs V(vd) for predicted current
+
+- For Vg=0.16V, plot these signals:
+  * I(I_ACTUAL_VG0.16) vs V(vd) for actual current
+  * I(I_PRED_VG0.16) vs V(vd) for predicted current
+
+- For Vg=0.17V, plot these signals:
+  * I(I_ACTUAL_VG0.17) vs V(vd) for actual current
+  * I(I_PRED_VG0.17) vs V(vd) for predicted current
+
+- For Vg=0.18V, plot these signals:
+  * I(I_ACTUAL_VG0.18) vs V(vd) for actual current
+  * I(I_PRED_VG0.18) vs V(vd) for predicted current
+
+- For Vg=0.19V, plot these signals:
+  * I(I_ACTUAL_VG0.19) vs V(vd) for actual current
+  * I(I_PRED_VG0.19) vs V(vd) for predicted current
+
+- For Vg=0.20V, plot these signals:
+  * I(I_ACTUAL_VG0.20) vs V(vd) for actual current
+  * I(I_PRED_VG0.20) vs V(vd) for predicted current
+
+- For Vg=0.21V, plot these signals:
+  * I(I_ACTUAL_VG0.21) vs V(vd) for actual current
+  * I(I_PRED_VG0.21) vs V(vd) for predicted current
+
+- For Vg=0.22V, plot these signals:
+  * I(I_ACTUAL_VG0.22) vs V(vd) for actual current
+  * I(I_PRED_VG0.22) vs V(vd) for predicted current
+
+- For Vg=0.23V, plot these signals:
+  * I(I_ACTUAL_VG0.23) vs V(vd) for actual current
+  * I(I_PRED_VG0.23) vs V(vd) for predicted current
+
+- For Vg=0.24V, plot these signals:
+  * I(I_ACTUAL_VG0.24) vs V(vd) for actual current
+  * I(I_PRED_VG0.24) vs V(vd) for predicted current
+
+- For Vg=0.25V, plot these signals:
+  * I(I_ACTUAL_VG0.25) vs V(vd) for actual current
+  * I(I_PRED_VG0.25) vs V(vd) for predicted current
+
+- For Vg=0.26V, plot these signals:
+  * I(I_ACTUAL_VG0.26) vs V(vd) for actual current
+  * I(I_PRED_VG0.26) vs V(vd) for predicted current
+
+- For Vg=0.27V, plot these signals:
+  * I(I_ACTUAL_VG0.27) vs V(vd) for actual current
+  * I(I_PRED_VG0.27) vs V(vd) for predicted current
+
+- For Vg=0.28V, plot these signals:
+  * I(I_ACTUAL_VG0.28) vs V(vd) for actual current
+  * I(I_PRED_VG0.28) vs V(vd) for predicted current
+
+- For Vg=0.29V, plot these signals:
+  * I(I_ACTUAL_VG0.29) vs V(vd) for actual current
+  * I(I_PRED_VG0.29) vs V(vd) for predicted current
+
+- For Vg=0.30V, plot these signals:
+  * I(I_ACTUAL_VG0.30) vs V(vd) for actual current
+  * I(I_PRED_VG0.30) vs V(vd) for predicted current
+
+- For Vg=0.31V, plot these signals:
+  * I(I_ACTUAL_VG0.31) vs V(vd) for actual current
+  * I(I_PRED_VG0.31) vs V(vd) for predicted current
+
+- For Vg=0.32V, plot these signals:
+  * I(I_ACTUAL_VG0.32) vs V(vd) for actual current
+  * I(I_PRED_VG0.32) vs V(vd) for predicted current
+
+- For Vg=0.33V, plot these signals:
+  * I(I_ACTUAL_VG0.33) vs V(vd) for actual current
+  * I(I_PRED_VG0.33) vs V(vd) for predicted current
+
+- For Vg=0.34V, plot these signals:
+  * I(I_ACTUAL_VG0.34) vs V(vd) for actual current
+  * I(I_PRED_VG0.34) vs V(vd) for predicted current
+
+- For Vg=0.35V, plot these signals:
+  * I(I_ACTUAL_VG0.35) vs V(vd) for actual current
+  * I(I_PRED_VG0.35) vs V(vd) for predicted current
+
+- For Vg=0.36V, plot these signals:
+  * I(I_ACTUAL_VG0.36) vs V(vd) for actual current
+  * I(I_PRED_VG0.36) vs V(vd) for predicted current
+
+- For Vg=0.37V, plot these signals:
+  * I(I_ACTUAL_VG0.37) vs V(vd) for actual current
+  * I(I_PRED_VG0.37) vs V(vd) for predicted current
+
+- For Vg=0.38V, plot these signals:
+  * I(I_ACTUAL_VG0.38) vs V(vd) for actual current
+  * I(I_PRED_VG0.38) vs V(vd) for predicted current
+
+- For Vg=0.39V, plot these signals:
+  * I(I_ACTUAL_VG0.39) vs V(vd) for actual current
+  * I(I_PRED_VG0.39) vs V(vd) for predicted current
+
+- For Vg=0.40V, plot these signals:
+  * I(I_ACTUAL_VG0.40) vs V(vd) for actual current
+  * I(I_PRED_VG0.40) vs V(vd) for predicted current
+
+- For Vg=0.41V, plot these signals:
+  * I(I_ACTUAL_VG0.41) vs V(vd) for actual current
+  * I(I_PRED_VG0.41) vs V(vd) for predicted current
+
+- For Vg=0.42V, plot these signals:
+  * I(I_ACTUAL_VG0.42) vs V(vd) for actual current
+  * I(I_PRED_VG0.42) vs V(vd) for predicted current
+
+- For Vg=0.43V, plot these signals:
+  * I(I_ACTUAL_VG0.43) vs V(vd) for actual current
+  * I(I_PRED_VG0.43) vs V(vd) for predicted current
+
+- For Vg=0.44V, plot these signals:
+  * I(I_ACTUAL_VG0.44) vs V(vd) for actual current
+  * I(I_PRED_VG0.44) vs V(vd) for predicted current
+
+- For Vg=0.45V, plot these signals:
+  * I(I_ACTUAL_VG0.45) vs V(vd) for actual current
+  * I(I_PRED_VG0.45) vs V(vd) for predicted current
+
+- For Vg=0.46V, plot these signals:
+  * I(I_ACTUAL_VG0.46) vs V(vd) for actual current
+  * I(I_PRED_VG0.46) vs V(vd) for predicted current
+
+- For Vg=0.47V, plot these signals:
+  * I(I_ACTUAL_VG0.47) vs V(vd) for actual current
+  * I(I_PRED_VG0.47) vs V(vd) for predicted current
+
+- For Vg=0.48V, plot these signals:
+  * I(I_ACTUAL_VG0.48) vs V(vd) for actual current
+  * I(I_PRED_VG0.48) vs V(vd) for predicted current
+
+- For Vg=0.49V, plot these signals:
+  * I(I_ACTUAL_VG0.49) vs V(vd) for actual current
+  * I(I_PRED_VG0.49) vs V(vd) for predicted current
+
+- For Vg=0.50V, plot these signals:
+  * I(I_ACTUAL_VG0.50) vs V(vd) for actual current
+  * I(I_PRED_VG0.50) vs V(vd) for predicted current
+
+- For Vg=0.51V, plot these signals:
+  * I(I_ACTUAL_VG0.51) vs V(vd) for actual current
+  * I(I_PRED_VG0.51) vs V(vd) for predicted current
+
+- For Vg=0.52V, plot these signals:
+  * I(I_ACTUAL_VG0.52) vs V(vd) for actual current
+  * I(I_PRED_VG0.52) vs V(vd) for predicted current
+
+- For Vg=0.53V, plot these signals:
+  * I(I_ACTUAL_VG0.53) vs V(vd) for actual current
+  * I(I_PRED_VG0.53) vs V(vd) for predicted current
+
+- For Vg=0.54V, plot these signals:
+  * I(I_ACTUAL_VG0.54) vs V(vd) for actual current
+  * I(I_PRED_VG0.54) vs V(vd) for predicted current
+
+- For Vg=0.55V, plot these signals:
+  * I(I_ACTUAL_VG0.55) vs V(vd) for actual current
+  * I(I_PRED_VG0.55) vs V(vd) for predicted current
+
+- For Vg=0.56V, plot these signals:
+  * I(I_ACTUAL_VG0.56) vs V(vd) for actual current
+  * I(I_PRED_VG0.56) vs V(vd) for predicted current
+
+- For Vg=0.57V, plot these signals:
+  * I(I_ACTUAL_VG0.57) vs V(vd) for actual current
+  * I(I_PRED_VG0.57) vs V(vd) for predicted current
+
+- For Vg=0.58V, plot these signals:
+  * I(I_ACTUAL_VG0.58) vs V(vd) for actual current
+  * I(I_PRED_VG0.58) vs V(vd) for predicted current
+
+- For Vg=0.59V, plot these signals:
+  * I(I_ACTUAL_VG0.59) vs V(vd) for actual current
+  * I(I_PRED_VG0.59) vs V(vd) for predicted current
+
+- For Vg=0.60V, plot these signals:
+  * I(I_ACTUAL_VG0.60) vs V(vd) for actual current
+  * I(I_PRED_VG0.60) vs V(vd) for predicted current
+
+- For Vg=0.61V, plot these signals:
+  * I(I_ACTUAL_VG0.61) vs V(vd) for actual current
+  * I(I_PRED_VG0.61) vs V(vd) for predicted current
+
+- For Vg=0.62V, plot these signals:
+  * I(I_ACTUAL_VG0.62) vs V(vd) for actual current
+  * I(I_PRED_VG0.62) vs V(vd) for predicted current
+
+- For Vg=0.63V, plot these signals:
+  * I(I_ACTUAL_VG0.63) vs V(vd) for actual current
+  * I(I_PRED_VG0.63) vs V(vd) for predicted current
+
+- For Vg=0.64V, plot these signals:
+  * I(I_ACTUAL_VG0.64) vs V(vd) for actual current
+  * I(I_PRED_VG0.64) vs V(vd) for predicted current
+
+- For Vg=0.65V, plot these signals:
+  * I(I_ACTUAL_VG0.65) vs V(vd) for actual current
+  * I(I_PRED_VG0.65) vs V(vd) for predicted current
+
+- For Vg=0.66V, plot these signals:
+  * I(I_ACTUAL_VG0.66) vs V(vd) for actual current
+  * I(I_PRED_VG0.66) vs V(vd) for predicted current
+
+- For Vg=0.67V, plot these signals:
+  * I(I_ACTUAL_VG0.67) vs V(vd) for actual current
+  * I(I_PRED_VG0.67) vs V(vd) for predicted current
+
+- For Vg=0.68V, plot these signals:
+  * I(I_ACTUAL_VG0.68) vs V(vd) for actual current
+  * I(I_PRED_VG0.68) vs V(vd) for predicted current
+
+- For Vg=0.69V, plot these signals:
+  * I(I_ACTUAL_VG0.69) vs V(vd) for actual current
+  * I(I_PRED_VG0.69) vs V(vd) for predicted current
+
+- For Vg=0.70V, plot these signals:
+  * I(I_ACTUAL_VG0.70) vs V(vd) for actual current
+  * I(I_PRED_VG0.70) vs V(vd) for predicted current
+
+- For Vg=0.71V, plot these signals:
+  * I(I_ACTUAL_VG0.71) vs V(vd) for actual current
+  * I(I_PRED_VG0.71) vs V(vd) for predicted current
+
+- For Vg=0.72V, plot these signals:
+  * I(I_ACTUAL_VG0.72) vs V(vd) for actual current
+  * I(I_PRED_VG0.72) vs V(vd) for predicted current
+
+- For Vg=0.73V, plot these signals:
+  * I(I_ACTUAL_VG0.73) vs V(vd) for actual current
+  * I(I_PRED_VG0.73) vs V(vd) for predicted current
+
+- For Vg=0.74V, plot these signals:
+  * I(I_ACTUAL_VG0.74) vs V(vd) for actual current
+  * I(I_PRED_VG0.74) vs V(vd) for predicted current
+
+- For Vg=0.75V, plot these signals:
+  * I(I_ACTUAL_VG0.75) vs V(vd) for actual current
+  * I(I_PRED_VG0.75) vs V(vd) for predicted current
+
+- For Vg=0.76V, plot these signals:
+  * I(I_ACTUAL_VG0.76) vs V(vd) for actual current
+  * I(I_PRED_VG0.76) vs V(vd) for predicted current
+
+- For Vg=0.77V, plot these signals:
+  * I(I_ACTUAL_VG0.77) vs V(vd) for actual current
+  * I(I_PRED_VG0.77) vs V(vd) for predicted current
+
+- For Vg=0.78V, plot these signals:
+  * I(I_ACTUAL_VG0.78) vs V(vd) for actual current
+  * I(I_PRED_VG0.78) vs V(vd) for predicted current
+
+- For Vg=0.79V, plot these signals:
+  * I(I_ACTUAL_VG0.79) vs V(vd) for actual current
+  * I(I_PRED_VG0.79) vs V(vd) for predicted current
+
+- For Vg=0.80V, plot these signals:
+  * I(I_ACTUAL_VG0.80) vs V(vd) for actual current
+  * I(I_PRED_VG0.80) vs V(vd) for predicted current
+
+## Tips for Better Visualization
+1. Use logarithmic scale for current (Y-axis) by right-clicking on Y-axis and selecting 'Log'
+2. Add grid lines through View → Grid
+3. Use different colors for actual and predicted curves
+4. Use the 'Edit → Add curve label' option to add labels to the curves

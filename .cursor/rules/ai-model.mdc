@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Briefly describe the project, system, or problem domain. Include any relevant background, goals, or constraints.
+> Example:
+> I am working on a neural network model to predict I-V characteristics of semiconductor devices. The project uses TensorFlow and custom loss functions inspired by recent research.
+[Task/Objective]
+Clearly state the specific task, question, or problem you want the AI to address. Be as precise as possible.
+> Example:
+> I need to implement a custom loss function that incorporates both MSE and the first derivative of the output with respect to the input.
+[Requirements/Constraints]
+List any technical requirements, coding standards, performance constraints, or other considerations.
+> Example:
+> - Use TensorFlow 2.x and Keras API
+> - The code should be compatible with GPU acceleration
+> - Follow PEP8 style guidelines
+> - The solution should be efficient for large datasets
+[Inputs/Outputs]
+Describe the expected inputs and outputs for the code, function, or system.
+> Example:
+> - Input: Model predictions, ground truth values, and input features
+> - Output: A scalar loss value suitable for backpropagation
+[Codebase/Environment Details]
+Provide any relevant details about the codebase, file structure, or environment.
+> Example:
+> - The main model is defined in model_with_exact_loss.py
+> - Data is preprocessed using data_loader.py
+> - Python 3.9, TensorFlow 2.11, running on macOS
+[Additional Instructions]
+Add any extra instructions, such as:
+Provide code with comments and docstrings
+Suggest tests or validation steps
+Explain your reasoning or design choices
+If you use external libraries, mention installation commands
+[Prompt Example]
+> Context:
+> I am developing a neural network for device modeling using TensorFlow.
+> Task:
+> Write a custom Keras loss function that combines MSE with the squared difference of the first derivative of the model output with respect to the input.
+> Requirements:
+> - Use TensorFlow 2.x
+> - The function must be differentiable
+> - Follow PEP8
+> Inputs/Outputs:
+> - Inputs: y_true, y_pred, input_tensor
+> - Output: Scalar loss
+> Codebase Details:
+> - Model is in model_with_exact_loss.py
+> Additional Instructions:
+> - Include comments and a usage example

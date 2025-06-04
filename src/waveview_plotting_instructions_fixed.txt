@@ -1,0 +1,59 @@
+# Instructions for Plotting in WaveView
+
+## Running the HSPICE file
+Run the HSPICE file with:
+hspice iv_data_for_wv_fixed.sp
+
+## Opening in WaveView
+Open WaveView and load the .tr0 file:
+wv &
+
+## Plotting Id-Vg Curves
+For each Vd value:
+- For Vd=0.01V:
+  * Plot V(id_act_vd0.01) vs V(vg_vd0.01) for actual current
+  * Plot V(id_pred_vd0.01) vs V(vg_vd0.01) for predicted current
+
+- For Vd=0.20V:
+  * Plot V(id_act_vd0.20) vs V(vg_vd0.20) for actual current
+  * Plot V(id_pred_vd0.20) vs V(vg_vd0.20) for predicted current
+
+- For Vd=0.40V:
+  * Plot V(id_act_vd0.40) vs V(vg_vd0.40) for actual current
+  * Plot V(id_pred_vd0.40) vs V(vg_vd0.40) for predicted current
+
+- For Vd=0.60V:
+  * Plot V(id_act_vd0.60) vs V(vg_vd0.60) for actual current
+  * Plot V(id_pred_vd0.60) vs V(vg_vd0.60) for predicted current
+
+- For Vd=0.80V:
+  * Plot V(id_act_vd0.80) vs V(vg_vd0.80) for actual current
+  * Plot V(id_pred_vd0.80) vs V(vg_vd0.80) for predicted current
+
+## Plotting Id-Vd Curves
+For each Vg value:
+- For Vg=0.01V:
+  * Plot V(id_act_vg0.01) vs V(vd_vg0.01) for actual current
+  * Plot V(id_pred_vg0.01) vs V(vd_vg0.01) for predicted current
+
+- For Vg=0.20V:
+  * Plot V(id_act_vg0.20) vs V(vd_vg0.20) for actual current
+  * Plot V(id_pred_vg0.20) vs V(vd_vg0.20) for predicted current
+
+- For Vg=0.40V:
+  * Plot V(id_act_vg0.40) vs V(vd_vg0.40) for actual current
+  * Plot V(id_pred_vg0.40) vs V(vd_vg0.40) for predicted current
+
+- For Vg=0.60V:
+  * Plot V(id_act_vg0.60) vs V(vd_vg0.60) for actual current
+  * Plot V(id_pred_vg0.60) vs V(vd_vg0.60) for predicted current
+
+- For Vg=0.80V:
+  * Plot V(id_act_vg0.80) vs V(vd_vg0.80) for actual current
+  * Plot V(id_pred_vg0.80) vs V(vd_vg0.80) for predicted current
+
+## Tips for Better Visualization
+1. Use logarithmic scale for current (Y-axis) by right-clicking on Y-axis and selecting 'Log'
+2. Add grid lines through View → Grid
+3. Use different colors for actual and predicted curves
+4. Use the 'Edit → Add curve label' option to add labels to the curves
