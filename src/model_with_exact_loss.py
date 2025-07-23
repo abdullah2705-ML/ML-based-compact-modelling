@@ -4,7 +4,7 @@ import os
 from exact_custom_loss import custom_loss_exact
 
 class ExactLossModel:
-    def __init__(self, hidden_layers=(8, 8, 8), learning_rate=1e-4, term_selection=1234):
+    def __init__(self, hidden_layers=(8, 8, 8), learning_rate=5e-4, term_selection=1234):
         self.hidden_layers = hidden_layers
         self.learning_rate = learning_rate
         self.term_selection = term_selection
