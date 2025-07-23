@@ -20,7 +20,7 @@ def custom_loss_exact(model, x_batch, y_true, dz_dvds_true=None, term_selection=
     # Constants for the loss function matching paper values
     a = 1.0    # Weight for term1 
     b = 2.0    # Weight for term2 (gd error)
-    c = 700.0  # Weight for term3 (gm error)
+    c = 500.0  # Weight for term3 (gm error)
     d = 100.0   # Weight for term4 (dz/dVDS error)
     epsilon = 1e-10  # Small constant to avoid division by zero
     
