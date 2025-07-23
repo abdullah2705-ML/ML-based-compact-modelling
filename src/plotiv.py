@@ -8,6 +8,8 @@ from model_with_exact_loss import ExactLossModel
 from data_loader import DataLoader
 from scipy.ndimage import gaussian_filter1d
 from scipy.interpolate import make_interp_spline
+from scipy.signal import savgol_filter
+
 
 # Function to load the original data
 def load_original_data(file_path='iv_data.csv'):
@@ -524,419 +526,81 @@ def plot_id_vd_curves(plot_data, model, save_dir='plots'):
     ax.set_title('dgd/dVd-Vd Characteristics')
     
     # Plot 4: Second derivative of gd with respect to Vd (d²gd/dVd²) (bottom right)
-    # Plot 4: Second derivative of gd with respect to Vd (d²gd/dVd²) (bottom right)
-    # Plot 4: Second derivative of gd with respect to Vd (d²gd/dVd²) (bottom right)
+    from scipy.signal import savgol_filter
+
     ax = axes[1, 1]
+    vd_min, vd_max = 0.0, 0.8
 
-    # Use a very different approach - directly work with the first derivative (conductance)
-    # and calculate second derivatives with minimal smoothing and scaling
+    for i, vg in enumerate(actual_vg_values):
+        # 1) Actual data
+        idxs = (unique_vd >= vd_min) & (unique_vd <= vd_max)
+        vd_cut = unique_vd[idxs]
+        gd_cut = gd_grid[idxs, np.where(unique_vg == vg)[0][0]]
 
-    # Generate a very high resolution grid for evaluation
-    vd_min = 0.002  # 2mV
-    vd_max = 0.8    # 800mV (or max(unique_vd) if you prefer)
+        # Smoothing parameters
+        window_length = 11 if len(vd_cut) >= 11 else 7  # Use a larger window if possible
+        polyorder = 3
 
-    print("=== DEBUGGING SECOND DERIVATIVE PLOT ===")
-    print(f"Data statistics: min Vd = {min(unique_vd)}, max Vd = {max(unique_vd)}")
-    print(f"Number of Vd points: {len(unique_vd)}")
+        if len(vd_cut) >= window_length:
+            d2_data = savgol_filter(
+                gd_cut,
+                window_length=window_length,
+                polyorder=polyorder,
+                deriv=2,
+                delta=vd_cut[1] - vd_cut[0]
+            )
+            ax.scatter(
+                vd_cut,
+                d2_data * 1e3,         # scale to mA/V^3
+                color=colors[i],
+                marker='o',
+                s=30,
+                alpha=0.7
+            )
 
-    # Try a completely different visualization approach - focus on the derivatives themselves
-    for i, vg_val in enumerate(actual_vg_values):
-        vg_idx = np.where(unique_vg == vg_val)[0][0]
-        
-        # Get directly available gd values
-        gd_values = gd_grid[:, vg_idx]
-        
-        # Print min/max stats to understand the scale
-        print(f"Vg={vg_val}V: gd min={np.min(gd_values):.6f}, max={np.max(gd_values):.6f}")
-        
-        # Create a smooth interpolation of gd values 
-        # Use cubic spline interpolation for smoother derivatives
-        from scipy.interpolate import CubicSpline
-        
-        # Filter to valid Vd range
-        valid_idx = (unique_vd >= vd_min)
-        valid_vd = unique_vd[valid_idx]
-        valid_gd = gd_values[valid_idx]
-        
-        try:
-            # Create cubic spline of gd vs vd
-            cs = CubicSpline(valid_vd, valid_gd)
-            
-            # Generate a dense evaluation grid
-            vd_dense = np.linspace(vd_min, vd_max, 500)
-            
-            # Evaluate first derivative (dgd/dvd) and second derivative (d²gd/dvd²)
-            # directly from the spline
-            dgd_dvd = cs.derivative(1)(vd_dense)  # First derivative of gd
-            d2gd_dvd2 = cs.derivative(2)(vd_dense)  # Second derivative of gd
-            
-            # Apply magnification factor if needed - try different values
-            magnification = 50  # Adjust as needed to see features
-            
-            # Plot with magnification
-            ax.plot(vd_dense, d2gd_dvd2 * magnification, linestyles[i], color=colors[i], 
-                    linewidth=2.0, label=f"{labels[i]} (×{magnification})")
-            
-            # Print stats to understand scaling
-            print(f"Vg={vg_val}V: d2gd/dvd2 min={np.min(d2gd_dvd2):.6f}, max={np.max(d2gd_dvd2):.6f}")
-            
-        except Exception as e:
-            print(f"CubicSpline failed for Vg={vg_val}V: {e}")
-            
-            # Fall back to direct numerical differentiation with minimal smoothing
-            # and try a different scaling
-            
-            # Apply minimal smoothing to gd values
-            gd_smooth = gaussian_filter1d(valid_gd, sigma=0.5)
-            
-            # Calculate first derivative numerically
-            dgd_dvd = np.gradient(gd_smooth, valid_vd)
-            dgd_smooth = gaussian_filter1d(dgd_dvd, sigma=0.5)
-            
-            # Calculate second derivative numerically
-            d2gd_dvd2 = np.gradient(dgd_smooth, valid_vd)
-            
-            # Apply stronger magnification
-            magnification = 100  # Try even larger value
-            
-            # Plot with magnification
-            ax.plot(valid_vd, d2gd_dvd2 * magnification, linestyles[i], color=colors[i], 
-                    linewidth=2.0, label=f"{labels[i]} (×{magnification})")
-            
-            # Print stats
-            print(f"Fallback method - Vg={vg_val}V: d2gd/dvd2 min={np.min(d2gd_dvd2):.6f}, max={np.max(d2gd_dvd2):.6f}")
+        # 2) Model prediction (use same vd_cut grid as data)
+        vd_m = vd_cut
+        vg_m = np.full_like(vd_m, vg)
+        x_m = x_scaler.transform(np.column_stack((vg_m, vd_m)))
+        y_m = model.predict(x_m).numpy().flatten()
+        id_m = vd_m * np.exp(y_m)
 
-    # Try one more completely different method - direct polynomial fitting
-    for i, vg_val in enumerate(actual_vg_values):
-        vg_idx = np.where(unique_vg == vg_val)[0][0]
-        
-        # Get id values directly
-        id_values = id_grid[:, vg_idx]
-        
-        # Filter to valid range
-        valid_idx = (unique_vd >= vd_min) & (unique_vd <= 0.3)  # Focus on lower Vd range
-        valid_vd = unique_vd[valid_idx]
-        valid_id = id_values[valid_idx]
-        
-        try:
-            # Use polynomial fitting - can directly get derivatives
-            # Try different polynomial degrees
-            from numpy.polynomial import Polynomial
-            
-            # Use a polynomial of suitable degree
-            deg = 10  # Higher degree can fit more features but may overfit
-            p = Polynomial.fit(valid_vd, valid_id, deg)
-            
-            # Get the derivatives
-            p_d1 = p.deriv(1)  # First derivative (similar to gd)
-            p_d2 = p.deriv(2)  # Second derivative (similar to dgd_dvd)
-            p_d3 = p.deriv(3)  # Third derivative (similar to d2gd_dvd2)
-            
-            # Evaluate on a dense grid
-            vd_dense = np.linspace(vd_min, 0.3, 300)
-            d2gd_poly = p_d3(vd_dense)
-            
-            # Apply less magnification for polynomial method
-            poly_mag = 5
-            
-            # Plot with dashed lines to distinguish from spline method
-            ax.plot(vd_dense, d2gd_poly * poly_mag, '--', color=colors[i], 
-                    linewidth=1.0, alpha=0.6)
-            
-            # Add scatter plot for a few points
-            scatter_idx = np.linspace(0, len(vd_dense)-1, 15, dtype=int)
-            ax.scatter(vd_dense[scatter_idx], d2gd_poly[scatter_idx] * poly_mag, 
-                    color=colors[i], s=20, marker='x')
-            
-        except Exception as e:
-            print(f"Polynomial method failed for Vg={vg_val}V: {e}")
+        gd_m = np.gradient(id_m, vd_m)
+        d2_model = savgol_filter(
+            gd_m,
+            window_length=window_length,
+            polyorder=polyorder,
+            deriv=2,
+            delta=vd_m[1] - vd_m[0]
+        )
 
-    # Set up the plot with clear visualization
-    ax.set_xlabel('$V_{DS}$ (V)')
-    ax.set_ylabel('$d^2g_d/dV_{DS}^2$ (scaled)')
-    ax.set_xlim(vd_min, vd_max)
+        # Optional: Apply a vertical offset if needed (uncomment to use)
+        # if len(vd_cut) >= window_length:
+        #     offset = np.mean((d2_data - d2_model) * 1e3)
+        #     d2_model = d2_model + offset / 1e3
 
-    # Auto-adjust y-limits based on visible data
-    # Exclude extreme outliers by using percentiles
-    all_values = []
-    for line in ax.get_lines():
-        ydata = line.get_ydata()
-        all_values.extend(ydata[~np.isnan(ydata)])
+        ax.plot(
+            vd_m,
+            d2_model * 1e3,        # same scale
+            linestyle=linestyles[i],
+            color=colors[i],
+            linewidth=2.0,
+            label=labels[i]
+        )
 
-    if all_values:
-        low_percentile = np.percentile(all_values, 5)
-        high_percentile = np.percentile(all_values, 95)
-        
-        # Set y-limits with some padding
-        y_range = high_percentile - low_percentile
-        y_min = low_percentile - 0.1 * y_range
-        y_max = high_percentile + 0.1 * y_range
-        
-        # Make sure we include zero
-        y_min = min(y_min, -0.1 * y_max)
-        
-        ax.set_ylim(y_min, y_max)
-    else:
-        # Fallback to default limits
-        ax.set_ylim(-3, 3)
-
+    ax.set(
+        xlabel='$V_{DS}$ (V)',
+        ylabel=r'$d^2g_d/dV_{DS}^2$ (mA/V$^3$)',
+        xlim=(vd_min, vd_max),
+        title='d²gₙ/dVd² – model vs data'
+    )
     ax.grid(True)
-    ax.axhline(y=0, color='k', linestyle='-', alpha=0.3)
-    ax.legend(fontsize=8)  # Smaller font to fit all labels
-    ax.set_title('d²gd/dVd²-Vd Characteristics (Enhanced)')
+    ax.legend(fontsize=9)
     
-    # Adjust layout and save
     plt.tight_layout()
-    plt.savefig(os.path.join(save_dir, 'id_gd_dgd_d2gd_vd_characteristics.png'), dpi=300)
-    plt.savefig(os.path.join(save_dir, 'id_gd_dgd_d2gd_vd_characteristics.pdf'))
+    plt.savefig(os.path.join(save_dir, 'id_gd_dgd_d2gd_vd.png'), dpi=300)
+    plt.savefig(os.path.join(save_dir, 'id_gd_dgd_d2gd_vd.pdf'))
     plt.close(fig)
-
-    # Improved version of the second derivative plot with professional styling
-    ax = axes[1, 1]
-
-    # Use a clean, consistent approach based on cubic spline interpolation
-    vd_min = 0.002  # 2mV
-    vd_max = 0.8    # 800mV (or max(unique_vd))
-
-    # Colors and markers for different Vgs values
-    colors = ['black', 'red', 'blue', 'green']
-    linestyles = ['-', '-', '-', '-']
-    markers = ['o', 's', '^', 'd']
-    labels = ['Vgs=10mV', 'Vgs=200mV', 'Vgs=400mV', 'Vgs=600mV']
-
-    # Optimal magnification factor based on our previous exploration
-    magnification = 50
-
-    # Create high-quality professional plot
-    for i, vg_val in enumerate(actual_vg_values):
-        vg_idx = np.where(unique_vg == vg_val)[0][0]
-        
-        # Get conductance values
-        gd_values = gd_grid[:, vg_idx]
-        
-        # Filter to valid Vd range and remove any NaN values
-        valid_idx = (unique_vd >= vd_min) & ~np.isnan(gd_values)
-        valid_vd = unique_vd[valid_idx]
-        valid_gd = gd_values[valid_idx]
-        
-        # Sort the data points by Vd to ensure proper interpolation
-        sort_idx = np.argsort(valid_vd)
-        valid_vd = valid_vd[sort_idx]
-        valid_gd = valid_gd[sort_idx]
-        
-        # Use cubic spline interpolation for smooth derivatives
-        from scipy.interpolate import CubicSpline
-        
-        try:
-            # Create cubic spline with appropriate boundary conditions
-            cs = CubicSpline(valid_vd, valid_gd, bc_type='natural')
-            
-            # Generate a dense evaluation grid with focus on low Vds region
-            # Use non-uniform grid with more points at low Vds
-            vd_dense1 = np.linspace(vd_min, 0.1, 200)  # More points in 2-100mV region
-            vd_dense2 = np.linspace(0.1, vd_max, 200)  # Fewer points in higher Vds
-            vd_dense = np.unique(np.concatenate([vd_dense1, vd_dense2]))
-            
-            # Evaluate second derivative directly from the spline
-            d2gd_dvd2 = cs.derivative(2)(vd_dense)
-            
-            # Apply light smoothing to reduce any remaining noise
-            d2gd_dvd2_smooth = gaussian_filter1d(d2gd_dvd2, sigma=0.5)
-            
-            # Plot main curve with professional styling
-            line, = ax.plot(vd_dense, d2gd_dvd2_smooth * magnification, 
-                    linestyle=linestyles[i], color=colors[i], linewidth=1.8, 
-                    label=f"{labels[i]}")
-            
-            # Add selective markers for clarity (not too many)
-            # Use logarithmic spacing for marker positions to focus on the transition region
-            log_indices = np.unique(np.logspace(0, np.log10(len(vd_dense)-1), 12, dtype=int))
-            ax.scatter(vd_dense[log_indices], d2gd_dvd2_smooth[log_indices] * magnification, 
-                    color=colors[i], s=35, marker=markers[i], alpha=0.8, zorder=10)
-            
-        except Exception as e:
-            print(f"CubicSpline failed for Vg={vg_val}V: {e}")
-            # Fall back to direct numerical differentiation if needed
-
-    # Professional formatting for the plot
-    ax.set_xlabel('$V_{DS}$ (V)', fontsize=11)
-    ax.set_ylabel('$d^2g_d/dV_{DS}^2$ (A/V$^3$)', fontsize=11)
-    ax.set_xlim(vd_min, vd_max)
-
-    # Set y-axis limits to focus on the important features
-    # Find appropriate y-limits from the data
-    all_ydata = []
-    for line in ax.get_lines():
-        all_ydata.extend(line.get_ydata())
-
-    if all_ydata:
-        # Use percentiles to exclude extreme outliers
-        y_min = np.percentile(all_ydata, 1)
-        y_max = np.percentile(all_ydata, 99)
-        
-        # Add some padding and ensure 0 is included
-        y_range = y_max - y_min
-        y_min = min(y_min - 0.05 * y_range, 0)
-        y_max = y_max + 0.05 * y_range
-        
-        ax.set_ylim(y_min, y_max)
-
-    # Create professional grid and zero line
-    ax.grid(True, linestyle='--', alpha=0.7)
-    ax.axhline(y=0, color='k', linestyle='-', alpha=0.5, linewidth=0.8)
-
-    # Add a magnification note in the plot
-    note_text = f"Note: Values scaled ×{magnification}"
-    ax.text(0.98, 0.02, note_text, transform=ax.transAxes, fontsize=9,
-            horizontalalignment='right', verticalalignment='bottom',
-            bbox=dict(facecolor='white', alpha=0.7, edgecolor='gray', boxstyle='round,pad=0.3'))
-
-    # Add scientific notation for the y-axis if needed
-    ax.ticklabel_format(axis='y', style='sci', scilimits=(-2, 2))
-
-    # Create a neater legend with smaller font
-    leg = ax.legend(fontsize=9, loc='upper right', framealpha=0.9)
-    leg.get_frame().set_edgecolor('gray')
-
-    # Professional title
-    ax.set_title('$d^2g_d/dV_{DS}^2$-$V_d$ Characteristics', fontsize=12)
-
-    # Set custom tick spacing for better readability
-    from matplotlib.ticker import MultipleLocator
-    ax.xaxis.set_major_locator(MultipleLocator(0.1))
-    ax.xaxis.set_minor_locator(MultipleLocator(0.05))
-
-    # Create an alternative log-scale plot as a separate figure
-    plt.figure(figsize=(7, 5))
-    for i, vg_val in enumerate(actual_vg_values):
-        vg_idx = np.where(unique_vg == vg_val)[0][0]
-        gd_values = gd_grid[:, vg_idx]
-        
-        valid_idx = (unique_vd >= vd_min) & ~np.isnan(gd_values)
-        valid_vd = unique_vd[valid_idx]
-        valid_gd = gd_values[valid_idx]
-        
-        sort_idx = np.argsort(valid_vd)
-        valid_vd = valid_vd[sort_idx]
-        valid_gd = valid_gd[sort_idx]
-        
-        try:
-            cs = CubicSpline(valid_vd, valid_gd, bc_type='natural')
-            vd_dense = np.logspace(np.log10(vd_min), np.log10(vd_max), 400)
-            d2gd_dvd2 = cs.derivative(2)(vd_dense)
-            d2gd_dvd2_smooth = gaussian_filter1d(d2gd_dvd2, sigma=0.5)
-            
-            plt.plot(vd_dense, d2gd_dvd2_smooth * magnification, 
-                    linestyle=linestyles[i], color=colors[i], linewidth=1.8, 
-                    label=f"{labels[i]}")
-            
-            log_indices = np.unique(np.geomspace(1, len(vd_dense)-1, 10, dtype=int))
-            plt.scatter(vd_dense[log_indices], d2gd_dvd2_smooth[log_indices] * magnification, 
-                    color=colors[i], s=35, marker=markers[i], alpha=0.8)
-            
-        except Exception as e:
-            print(f"Log-scale plot failed for Vg={vg_val}V: {e}")
-
-    # Format the log-scale plot
-    plt.xscale('log')
-    plt.xlabel('$V_{DS}$ (V)', fontsize=11)
-    plt.ylabel('$d^2g_d/dV_{DS}^2$ (A/V$^3$)', fontsize=11)
-    plt.xlim(vd_min, vd_max)
-    plt.grid(True, which='both', linestyle='--', alpha=0.7)
-    plt.axhline(y=0, color='k', linestyle='-', alpha=0.5, linewidth=0.8)
-
-    plt.text(0.98, 0.02, f"Note: Values scaled ×{magnification}", transform=plt.gca().transAxes, 
-            fontsize=9, ha='right', va='bottom',
-            bbox=dict(facecolor='white', alpha=0.7, edgecolor='gray', boxstyle='round,pad=0.3'))
-
-    leg = plt.legend(fontsize=9, loc='upper right', framealpha=0.9)
-    leg.get_frame().set_edgecolor('gray')
-    plt.title('$d^2g_d/dV_{DS}^2$-$V_d$ Characteristics (Log Scale)', fontsize=12)
-    plt.tight_layout()
-    plt.savefig(os.path.join(save_dir, 'log_scale_d2gd_dvd2_enhanced.png'), dpi=300)
-    plt.savefig(os.path.join(save_dir, 'log_scale_d2gd_dvd2_enhanced.pdf'))
-    plt.close()
-    
-    # Create a separate figure just for the second derivative with enhanced visibility
-    plt.figure(figsize=(8, 6))
-    
-    # Calculate proper scaling factor to get units in A/V³ (not mA/V³)
-    # If your data is in A, then set scaling_factor to 1
-    # If your data is in mA (which it seems to be), then we need to convert mA to A (1/1000)
-    scaling_factor = 1  # Since we want units in A/V³, not mA/V³
-    
-    # Skip the very low Vds values to avoid the division-by-zero-like issues
-    for i, vg_val in enumerate(actual_vg_values):
-        # Generate model predictions but skip the problematic very low Vds values
-        vd_model = np.linspace(0.01, max(unique_vd), 300)  # Start at 0.01V instead of nearly 0
-        vg_model = np.ones_like(vd_model) * vg_val
-        x_model = np.column_stack((vg_model, vd_model))
-        x_model_scaled = x_scaler.transform(x_model)
-        
-        # Get model predictions
-        y_model = model.predict(x_model_scaled).numpy().flatten()
-        id_model = vd_model * np.exp(y_model)
-        
-        # Apply stronger smoothing to the original data before differentiation
-        id_model_smooth = gaussian_filter1d(id_model, sigma=1.0)
-        
-        # Calculate derivatives with progressively more smoothing
-        gd_model = np.gradient(id_model_smooth, vd_model)
-        gd_model_smooth = gaussian_filter1d(gd_model, sigma=1.5)
-        
-        dgd_model = np.gradient(gd_model_smooth, vd_model)
-        dgd_model_smooth = gaussian_filter1d(dgd_model, sigma=2.0)
-        
-        d2gd_dvd2_model = np.gradient(dgd_model_smooth, vd_model)
-        
-        # Apply stronger final smoothing
-        d2gd_dvd2_model = gaussian_filter1d(d2gd_dvd2_model, sigma=2.5)
-        
-        # Plot with markers for better visibility (use fewer markers)
-        plt.plot(vd_model, d2gd_dvd2_model, linestyles[i], color=colors[i], 
-                linewidth=2.0, label=labels[i], marker=markers[i], markevery=30)
-    
-    # For the actual data points, also skip very low Vds values and apply stronger smoothing
-    for i, vg_val in enumerate(actual_vg_values):
-        vg_idx = np.where(unique_vg == vg_val)[0][0]
-        
-        # Filter out Vds values below a threshold
-        vd_threshold = 0.01  # Skip points below 0.01V
-        valid_indices = unique_vd >= vd_threshold
-        valid_vd = unique_vd[valid_indices]
-        
-        # Compute derivatives only for valid Vds values
-        gd_values = gd_grid[valid_indices, vg_idx]
-        
-        # Apply strong smoothing before differentiation
-        gd_values_smooth = gaussian_filter1d(gd_values, sigma=2.0)
-        
-        # Calculate derivatives with careful numerical methods
-        dgd_dvd_values = np.gradient(gd_values_smooth, valid_vd)
-        dgd_dvd_values_smooth = gaussian_filter1d(dgd_dvd_values, sigma=2.5)
-        
-        d2gd_dvd2_values = np.gradient(dgd_dvd_values_smooth, valid_vd)
-        d2gd_dvd2_values = gaussian_filter1d(d2gd_dvd2_values, sigma=3.0)
-        
-        # Plot actual data as markers with less frequency
-        plt.scatter(valid_vd, d2gd_dvd2_values, color=colors[i], s=40, alpha=0.6, marker=markers[i])
-    
-    # Match the paper's axis settings exactly
-    plt.xlabel('$V_{DS}$ (V)')
-    plt.ylabel('$d^2g_d/dV_{DS}^2$ (A/V$^3$)')
-    plt.xlim(0.01, 0.8)  # Start from 0.01V to avoid the problematic region
-    
-    # Set fixed y-axis limits to exactly match the paper
-    plt.ylim(-3, 20)  # Match paper axis limits exactly
-    
-    plt.grid(True)
-    plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
-    plt.legend()
-    plt.title('d²gd/dVd²-Vd Characteristics')
-    plt.tight_layout()
-    plt.savefig(os.path.join(save_dir, 'paper_style_d2gd_dvd2_characteristics.png'), dpi=300)
-    plt.savefig(os.path.join(save_dir, 'paper_style_d2gd_dvd2_characteristics.pdf'))
-    plt.close()
 
 # Improved d²gd/dVd² plot function
 def plot_paper_style_second_derivative(plot_data, model, save_dir='plots'):
