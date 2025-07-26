@@ -877,7 +877,7 @@ def main():
         # Check if preprocessed data exists, if not, preprocess
         if not os.path.exists('preprocessed_data.pkl'):
             print("Preprocessed data not found. Running data preprocessing...")
-            loader = DataLoader(file_path='iv_data.csv')
+            loader = DataLoader(file_path='src/iv_data.csv')
             data = loader.load_data()
         else:
             # Load preprocessed data
